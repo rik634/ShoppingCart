@@ -4,9 +4,11 @@ import com.code.shopping_cart.Bean.ImageBean;
 import com.code.shopping_cart.exception.ResourceNotFoundException;
 import com.code.shopping_cart.model.Image;
 import com.code.shopping_cart.response.ApiResponse;
+import com.code.shopping_cart.service.category.CategoryServiceImpl;
 import com.code.shopping_cart.service.image.ImageServiceImpl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 
 import org.springframework.core.io.Resource;
@@ -25,10 +27,14 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @RestController
 @RequestMapping("${api.prefix}/images")
-@RequiredArgsConstructor //for constructor injection of the dependencies
+ //for constructor injection of the dependencies
 public class ImageController {
     private final ImageServiceImpl imageService;
 
+    @Autowired
+    public ImageController(ImageServiceImpl imageService) {
+        this.imageService = imageService;
+    }
     @PostMapping("/upload")
     public ResponseEntity<ApiResponse> saveImages(@RequestParam List<MultipartFile> files, @RequestParam Long productId)
     {

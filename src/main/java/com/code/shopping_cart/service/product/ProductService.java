@@ -1,5 +1,6 @@
 package com.code.shopping_cart.service.product;
 
+import com.code.shopping_cart.Bean.ProductBean;
 import com.code.shopping_cart.model.Product;
 import com.code.shopping_cart.request.AddProductRequest;
 import com.code.shopping_cart.request.ProductUpdateRequest;
@@ -21,4 +22,7 @@ public interface ProductService {
     List<Product> getProductsByBrandAndName(String brand, String name);
     Long countProductsByBrandAndName(String brand, String name);
 
+    ProductBean convertToBean(Product product);
+
+    List<ProductBean> getConvertedProducts(List<Product> products);
 }

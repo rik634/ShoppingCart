@@ -8,6 +8,7 @@ import com.code.shopping_cart.response.ApiResponse;
 import com.code.shopping_cart.service.category.CategoryServiceImpl;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,11 +18,15 @@ import static org.springframework.http.HttpStatus.*;
 
 @RestController
 @RequestMapping("${api.prefix}/categories")
-@RequiredArgsConstructor //for constructor injection of the dependencies
+//for constructor injection of the dependencies
 public class CategoryController {
 
     private final CategoryServiceImpl categoryService;
 
+    @Autowired
+    public CategoryController(CategoryServiceImpl categoryService) {
+        this.categoryService = categoryService;
+    }
     @GetMapping("/all")
     public ResponseEntity<ApiResponse> getAllCategories()
     {

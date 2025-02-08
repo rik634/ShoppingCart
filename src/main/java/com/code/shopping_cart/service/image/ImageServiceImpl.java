@@ -5,8 +5,10 @@ import com.code.shopping_cart.exception.ResourceNotFoundException;
 import com.code.shopping_cart.model.Image;
 import com.code.shopping_cart.model.Product;
 import com.code.shopping_cart.repository.ImageRepository;
+import com.code.shopping_cart.service.category.CategoryServiceImpl;
 import com.code.shopping_cart.service.product.ProductServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,12 +19,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
+
 public class ImageServiceImpl implements ImageService{
 
     private final ImageRepository imageRepository;
     private final ProductServiceImpl productService;
 
+    @Autowired
+    public ImageServiceImpl(ImageRepository imageRepository,ProductServiceImpl productService) {
+        this.imageRepository = imageRepository;
+        this.productService=productService;
+    }
     @Override
     public Image getImageById(Long id) {
         return imageRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Image not found with id: "+id));

@@ -8,10 +8,9 @@ import lombok.Setter;
 
 import java.util.List;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+
+
+
 @Entity
 public class Category {
     @Id
@@ -22,7 +21,25 @@ public class Category {
     @OneToMany(mappedBy = "category")
     private List<Product> products;
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Category() {
+    }
+
     public Category(String name) {
         this.name = name;
     }
+
+    public Category(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+   
 }
